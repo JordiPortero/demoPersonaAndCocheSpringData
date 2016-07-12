@@ -117,7 +117,13 @@ public class CocheService {
        System.out.println(cocheRepository.obtenerMediaPorMarca("Seat"));
 
         System.out.println("Los coches de Ivan son: ");
-        System.out.println(cocheRepository.obtenerCoches(ivan));
+        System.out.println(cocheRepository.obtenerCochesDePropietario(ivan));
+
+        System.out.println("Los coches de Ivan de precio >= 30.000e son: ");
+        System.out.println(cocheRepository.findByPropietarioAndPrecioGreaterThanEqual(ivan, 30000.0));
+
+
+        System.out.println(cocheRepository.obtenerCochesDePropietarioPrecioSuperior);
 
 
 

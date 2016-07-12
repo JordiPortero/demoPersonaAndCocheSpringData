@@ -30,7 +30,11 @@ public interface CocheRepository extends JpaRepository<Coche,Long> {
     Double obtenerMediaPorMarca (@Param("marca")String marca);
     //Que nos devuelva todos los coches que tiene una persona.
     @Query("SELECT(coche) from Coche coche where coche.propietario = :propietario")
-    List<Coche>obtenerCoches (@Param("propietario")Persona propietario);
+    List<Coche>obtenerCochesDePropietario (@Param("propietario")Persona propietario);
+
+    List<Coche> findByPropietarioAndPrecioGreaterThanEqual(Persona persona, Double precio);
+    @Query("SELECT(coche) from Coche coche where coche.propietario = :propietario and coche.precio=:precio")
+    List<Coche>obtenerCochesDePropietarioPrecioSuperior (@Param("propietario")Persona propietario, );
 
 
 }
