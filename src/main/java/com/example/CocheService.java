@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 public class CocheService {
     @Autowired
     private CocheRepository cocheRepository;
+    //con esto en esta clase puedo usar los dos repositorios, de personas i de coches.
+    @Autowired
+    private PersonaRepository personaRepository;
 
     public void testCoches(){
         Coche coche = new Coche();
@@ -19,8 +22,16 @@ public class CocheService {
         coche.setAño (2005);
         coche.setPrecio(20000.0);
         coche.setMatricula("4524BSG");
-        cocheRepository.save(coche);
+        //Añado una persona, de la clase personas (copy-paste), pero le pongo otro nombre.
+        Persona persona = new Persona();
+        persona.setNombre("Pedro");
+        persona.setAge(23);
+        personaRepository.save(persona);
+        coche.setPropietario(persona);  // Aqui se vincula la persona Pedro a éste coche como propietario.
 
+
+        cocheRepository.save(coche);
+        //(Arriba)He añadido un propietario al coche1.
 
         Coche coche2 = new Coche();
         coche2.setId (2L);
@@ -38,6 +49,9 @@ public class CocheService {
         coche3.setAño (2014);
         coche3.setPrecio(30000.0);
         coche3.setMatricula("5876HMH");
+        //le asignamos ivan como propietario del coche3. buscamos la persona de id=1.
+        Persona ivan = personaRepository.findOne(1L);
+        coche3.setPropietario(ivan);
         cocheRepository.save(coche3);
 
         Coche coche4 = new Coche();
@@ -47,6 +61,8 @@ public class CocheService {
         coche4.setAño (2000);
         coche4.setPrecio(25000.0);
         coche4.setMatricula("5624BNF");
+
+        coche4.setPropietario(ivan);
         cocheRepository.save(coche4);
 
         Coche coche5 = new Coche();
@@ -56,6 +72,7 @@ public class CocheService {
         coche5.setAño (2010);
         coche5.setPrecio(35000.0);
         coche5.setMatricula("5876STA");
+        coche5.setPropietario(ivan);
         cocheRepository.save(coche5);
 
         Coche coche6 = new Coche();
@@ -98,6 +115,9 @@ public class CocheService {
 
        System.out.println("El precio medio de todos los coches Seat es: ");
        System.out.println(cocheRepository.obtenerMediaPorMarca("Seat"));
+
+        System.out.println("Los coches de Ivan son: ");
+        System.out.println(cocheRepository.obtenerCoches(ivan));
 
 
 

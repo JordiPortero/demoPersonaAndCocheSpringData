@@ -10,8 +10,15 @@ public class DemoApplication {
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context =SpringApplication.run(DemoApplication.class, args);
 
+		PersonaService personaService= context.getBean(PersonaService.class);
+
+		personaService.testPersonas();
+
+
 		CocheService cocheService=context.getBean(CocheService.class);
 
 		cocheService.testCoches();
+
+
 	}
 }

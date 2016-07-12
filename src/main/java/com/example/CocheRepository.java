@@ -28,7 +28,9 @@ public interface CocheRepository extends JpaRepository<Coche,Long> {
     // La sentencia diu: Develveme la media de precios de todos los coches de marca especificada. (aunke asalga en rojo la clase coche, no dara error).
     @Query("SELECT AVG (c.precio) from Coche c where c.marca = :marca")
     Double obtenerMediaPorMarca (@Param("marca")String marca);
-
+    //Que nos devuelva todos los coches que tiene una persona.
+    @Query("SELECT(coche) from Coche coche where coche.propietario = :propietario")
+    List<Coche>obtenerCoches (@Param("propietario")Persona propietario);
 
 
 }

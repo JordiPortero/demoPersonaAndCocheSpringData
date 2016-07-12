@@ -1,9 +1,6 @@
 package com.example;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by professor on 11/07/2016.
@@ -19,7 +16,17 @@ import javax.persistence.Id;
         private Integer año;
         private Double precio;
         private String matricula;
+    @ManyToOne //con manytoone se le dice k un coche pertenece a una persona unicamente, pero k una persona puede tener muchos coches.
+        //Añado un nuevo atributo, propietario, pero de la clase Persona. I le doy a getter i setter i añado el propietario.
+        private Persona propietario;
 
+    public Persona getPropietario() {
+        return propietario;
+    }
+
+    public void setPropietario(Persona propietario) {
+        this.propietario = propietario;
+    }
 
     public Long getId() {
         return id;
