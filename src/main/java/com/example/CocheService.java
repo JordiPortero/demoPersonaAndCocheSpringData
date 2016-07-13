@@ -138,6 +138,9 @@ public class CocheService {
         System.out.println("Los coches de los propietarios que tiene entre 23 y 24 años son: ");
         System.out.println(cocheRepository.obtenerCochePorRangoEdadPropietarios(23, 24));
 
+        System.out.println("Muestra los coches cuya matricula contenga el fragmento: 76S");
+        System.out.println(cocheRepository.getCocheMatriculasQueContengan("76S"));
+
 
     }
 

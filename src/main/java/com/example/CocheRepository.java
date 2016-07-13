@@ -47,4 +47,6 @@ public interface CocheRepository extends JpaRepository<Coche,Long> {
     @Query("SELECT(coche) from Coche coche  where coche.propietario.age between :age and :age2")
     List<Coche>obtenerCochePorRangoEdadPropietarios(@Param("age")Integer age, @Param("age2") Integer age2);
 
+    @Query ("SELECT (coche)FROM Coche coche WHERE coche.matricula LIKE(CONCAT('%',:fragmentoMatricula,'%'))")
+    List<Coche> getCocheMatriculasQueContengan(@Param ("fragmentoMatricula") String fragmentoMatricula);
 }
