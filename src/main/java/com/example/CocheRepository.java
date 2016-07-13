@@ -49,4 +49,9 @@ public interface CocheRepository extends JpaRepository<Coche,Long> {
 
     @Query ("SELECT (coche)FROM Coche coche WHERE coche.matricula LIKE(CONCAT('%',:fragmentoMatricula,'%'))")
     List<Coche> getCocheMatriculasQueContengan(@Param ("fragmentoMatricula") String fragmentoMatricula);
+
+    @Query ("SELECT coche.marca, MAX (coche.precio), MIN (coche.precio), AVG (coche.precio) FROM Coche coche GROUP BY coche.marca")
+    List<Object[]> getEstadisticaPorMarca();
+
+
 }
