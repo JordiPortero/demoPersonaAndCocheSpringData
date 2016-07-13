@@ -88,6 +88,28 @@ public class CocheService {
         coche6.setPropietario(jordi);
         cocheRepository.save(coche6);
 
+        Coche coche7 = new Coche();
+        coche7.setId(7L);
+        coche7.setMarca("Renault");
+        coche6.setModelo("Once");
+        coche7.setAño (1990);
+        coche7.setPrecio(6000.0);
+        coche7.setMatricula("4863GTA");
+        Persona noelia=personaRepository.findOne(3L);
+        coche7.setPropietario(noelia);
+        cocheRepository.save(coche7);
+
+        Coche coche8 = new Coche();
+        coche8.setId(8L);
+        coche8.setMarca("Volkswagen");
+        coche8.setModelo("Tiguan");
+        coche8.setAño (2016);
+        coche8.setPrecio(35000.0);
+        coche8.setMatricula("6348JLP");
+        Persona ricard=personaRepository.findOne(5L);
+        coche8.setPropietario(ricard);
+        cocheRepository.save(coche8);
+
         System.out.println("Los coches fabricados en los años >= 2010 son: ");
         System.out.println(cocheRepository.findByAñoGreaterThanEqual(2010));
         System.out.println("Los coches fabricados en los años <= 2002 son: ");
