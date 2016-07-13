@@ -40,6 +40,8 @@ public class CocheService {
         coche2.setAño (2004);
         coche2.setPrecio(25000.0);
         coche2.setMatricula("5624BNF");
+        Persona dimple=personaRepository.findOne(2L);
+        coche2.setPropietario(dimple);
         cocheRepository.save(coche2);
 
         Coche coche3 = new Coche();
@@ -82,6 +84,8 @@ public class CocheService {
         coche6.setAño (2002);
         coche6.setPrecio(12500.0);
         coche6.setMatricula("2548BJL");
+        Persona jordi = personaRepository.findOne(4L);
+        coche6.setPropietario(jordi);
         cocheRepository.save(coche6);
 
         System.out.println("Los coches fabricados en los años >= 2010 son: ");
@@ -122,9 +126,17 @@ public class CocheService {
         System.out.println("Los coches de Ivan de precio >= 30.000e son: ");
         System.out.println(cocheRepository.findByPropietarioAndPrecioGreaterThanEqual(ivan, 30000.0));
 
+        System.out.println("Los coches de Ivan de precio >= 30000.0e son(con @Query): ");
+        System.out.println(cocheRepository.obtenerCochesDePropietarioPrecioSuperior(ivan, 30000.0));
 
-        System.out.println(cocheRepository.obtenerCochesDePropietarioPrecioSuperior);
+        System.out.println("Los coches de Ivan de precio >= 30000.0e y de año entre 2011 y 2015 son(con Query): ");
+        System.out.println(cocheRepository.cochesPropietarioPrecioAñoEntre(ivan, 30000.0, 2011, 2015));
 
+        System.out.println("Los coches de las personas que tienen más de 24 años son: ");
+        System.out.println(cocheRepository.obtenerCochesPorEdadPropietario(24));
+
+        System.out.println("Los coches de los propietarios que tiene entre 23 y 24 años son: ");
+        System.out.println(cocheRepository.obtenerCochePorRangoEdadPropietarios(23, 24));
 
 
     }

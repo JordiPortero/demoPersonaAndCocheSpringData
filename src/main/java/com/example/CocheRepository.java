@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.IntSummaryStatistics;
 import java.util.List;
 
 /**
@@ -31,10 +32,19 @@ public interface CocheRepository extends JpaRepository<Coche,Long> {
     //Que nos devuelva todos los coches que tiene una persona.
     @Query("SELECT(coche) from Coche coche where coche.propietario = :propietario")
     List<Coche>obtenerCochesDePropietario (@Param("propietario")Persona propietario);
-
+    //resolt per coches i preu>=.
     List<Coche> findByPropietarioAndPrecioGreaterThanEqual(Persona persona, Double precio);
-    @Query("SELECT(coche) from Coche coche where coche.propietario = :propietario and coche.precio=:precio")
-    List<Coche>obtenerCochesDePropietarioPrecioSuperior (@Param("propietario")Persona propietario, );
 
+   @Query("SELECT(coche) from Coche coche where coche.propietario = :propietario and coche.precio>=:precio")
+    List<Coche>obtenerCochesDePropietarioPrecioSuperior (@Param("propietario")Persona propietario, @Param("precio")Double precio);
+
+    @Query("SELECT(coche) from Coche coche where coche.propietario = :propietario and coche.precio>=:precio and coche.año BETWEEN :año and :año2")
+    List<Coche>cochesPropietarioPrecioAñoEntre (@Param("propietario")Persona propietario, @Param("precio")Double precio, @Param("año")Integer año, @Param("año2")Integer año2);
+
+    @Query("SELECT(coche) from Coche coche  where coche.propietario.age>=:age")
+    List<Coche>obtenerCochesPorEdadPropietario(@Param("age")Integer age);
+
+    @Query("SELECT(coche) from Coche coche  where coche.propietario.age between :age and :age2")
+    List<Coche>obtenerCochePorRangoEdadPropietarios(@Param("age")Integer age, @Param("age2") Integer age2);
 
 }
