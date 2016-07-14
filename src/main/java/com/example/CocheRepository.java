@@ -24,7 +24,7 @@ public interface CocheRepository extends JpaRepository<Coche,Long> {
     List<Coche>findByMarcaAndModelo (String marca, String modelo);
     List<Coche>findByMarcaAndPrecioLessThanEqual(String marca, Double precio);
     List<Coche>findByMarcaAndModeloAndPrecioGreaterThanEqual(String marca, String modelo,  Double precio);
-
+    List<Coche>findByAño (Integer año);
     //Al poner @Query, spring hara como método lo que tu le pidas, i no será como los metodos ya preestablecidos en la tabla 4 de Spring data reference.
     // La sentencia diu: Develveme la media de precios de todos los coches de marca especificada. (aunke asalga en rojo la clase coche, no dara error).
     @Query("SELECT AVG (c.precio) from Coche c where c.marca = :marca")
@@ -51,7 +51,13 @@ public interface CocheRepository extends JpaRepository<Coche,Long> {
     List<Coche> getCocheMatriculasQueContengan(@Param ("fragmentoMatricula") String fragmentoMatricula);
 
     @Query ("SELECT coche.marca, MAX (coche.precio), MIN (coche.precio), AVG (coche.precio) FROM Coche coche GROUP BY coche.marca")
+    //Creo un list de objeto pk quiero que me devuelva 4: marca, minimo, maximo y media.(=es una tabla lo k me devuleve, varios valores i no uno solo). Lo creo vacío pk no le tengo k introducir nada.
     List<Object[]> getEstadisticaPorMarca();
+
+    @Query("SELECT coche.año, COUNT (coche) FROM Coche coche GROUP BY coche.año")
+    //aqui, tb tengo k hacer list de objeto pk aqui  se almacena dos cosas, los años i el contador de coches, i  no solo uno como en los list de coche anteriores.
+    //list, pk pueden haber n grupos, tanto como años-
+    List<Object[]> getCochePorAño ();
 
 
 }

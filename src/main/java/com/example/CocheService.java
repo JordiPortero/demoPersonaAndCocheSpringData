@@ -2,6 +2,7 @@ package com.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.List;
 
@@ -174,6 +175,17 @@ public class CocheService {
             System.out.println("min: " + estadisticasCoche[2]);
             System.out.println("------------------------------------------------------------------");
 
+
+        }
+        //El exer de a continuacion se pude hacer como el anterior tb.
+       System.out.println("El numero de coches fabricados por año es: ");
+        for (Object[] estadisticasAño :cocheRepository.getCochePorAño())  {
+
+            //Integer: acepta menos distancia numerica k el long.
+            Integer año= (Integer)estadisticasAño[0];
+            System.out.println("Año: "+año);
+            System.out.println("nuymero de coches: "+estadisticasAño[1]);
+            System.out.println("Listado de coches: "+cocheRepository.findByAño(año));
 
         }
 
